@@ -25,7 +25,9 @@ export const SectionTitle = styled.h1`
   font-family: R-FLEX-REGULAR;
 `;
 
-export const TextPreview = styled.p`
+export const TextPreview = styled(motion.p)`
+  padding: 12px;
+  border-radius: 24px;
   cursor: pointer;
   font-size: ${(props) =>
     props.type === "h1"
@@ -41,7 +43,7 @@ export const TextPreview = styled.p`
       : "24px"};
   font-family: R-FLEX-REGULAR;
   span {
-    font-size: ${(props) => props.fontSize && `calc(${props.fontSize} - 6px)`};
+    font-size: ${(props) => props.fontSize && `calc(${props.fontSize} - 3px)`};
   }
 `;
 
@@ -51,7 +53,7 @@ export const TextUlContainer = styled(motion.ul)`
   height: max-content;
   flex-direction: column;
   align-items: flex-start;
-  gap: 36px;
+  gap: 24px;
   position: relative;
   justify-content: center;
   padding: 18px 36px;

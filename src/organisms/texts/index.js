@@ -14,7 +14,8 @@ import CopyToClipboard from "react-copy-to-clipboard";
 function TextOrganisms() {
   const [data, setData] = useRecoilState(firebaseDataState);
   const [isPaste, setIsPaste] = useState(false);
-
+  const [onHover, setOnHover] = useState(false);
+  const [hoverId, setHoverId] = useState();
   const pasteText = () => {
     setIsPaste(true);
     setTimeout(() => {
@@ -39,7 +40,7 @@ function TextOrganisms() {
       </InfoContainer>
       {data?.text && (
         <TextUlContainer>
-          {variants.map((item) => {
+          {variants.map((item, index) => {
             return (
               <CopyToClipboard
                 text={`
@@ -63,6 +64,17 @@ function TextOrganisms() {
                   fontSize={data?.text}
                   type={item.tag}
                   key={item.tag}
+                  onHoverStart={() => {
+                    setOnHover(true);
+                    setHoverId(index);
+                  }}
+                  onHoverEnd={() => {
+                    setOnHover(true);
+                    setHoverId();
+                  }}
+                  style={{
+                    backgroundColor: hoverId === index ? "#efefef" : "white",
+                  }}
                 >
                   Typography
                   <span>
