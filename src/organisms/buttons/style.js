@@ -67,76 +67,71 @@ export const CloseButton = styled(motion.div)`
 
 export const ButtonUlContainer = styled(motion.ul)`
   display: flex;
-  width: 80%;
+  width: 90%;
   height: max-content;
   gap: 36px;
   position: relative;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   padding: 18px 36px;
   margin: 6px 0;
   border-radius: 24px;
+  flex-wrap: wrap;
+  div: {
+    flex-grow: 0;
+  }
 `;
 
 export const CustomButton = styled.button`
   display: flex;
+  cursor: pointer;
   justify-content: center;
   align-items: center;
-
-  color: ${(props) => props.color && props.color};
+  opacity: ${(props) => props.variants === "disabled" && "0.7"};
+  color: ${(props) =>
+    props.variants === "ghost" ? props.backgroundColor : props.color};
   background-color: ${(props) =>
-    props.backgroundColor && props.backgroundColor};
+    props.variants === "ghost" ? "transparent" : props.backgroundColor};
   padding-top: ${(props) =>
     props.paddingTb
-      ? props.large
+      ? props.variants === "large"
         ? `calc(${props.paddingTb} + 3px)`
-        : props.small
+        : props.variants === "small"
         ? `calc(${props.paddingTb} - 3px)`
         : props.paddingTb
       : "12px"};
   padding-bottom: ${(props) =>
     props.paddingTb
-      ? props.large
+      ? props.variants === "large"
         ? `calc(${props.paddingTb} + 3px)`
-        : props.small
+        : props.variants === "small"
         ? `calc(${props.paddingTb} - 3px)`
         : props.paddingTb
       : "12px"};
   padding-left: ${(props) =>
     props.paddingLr
-      ? props.large
+      ? props.variants === "large"
         ? `calc(${props.paddingLr} + 12px)`
-        : props.small
+        : props.variants === "small"
         ? `calc(${props.paddingLr} - 6px)`
         : props.paddingLr
       : "12px"};
   padding-right: ${(props) =>
     props.paddingLr
-      ? props.large
+      ? props.variants === "large"
         ? `calc(${props.paddingLr} + 12px)`
-        : props.small
+        : props.variants === "small"
         ? `calc(${props.paddingLr} - 6px)`
         : props.paddingLr
       : "12px"};
   font-size: ${(props) => props.fontSize && props.fontSize};
-  border: ${(props) => props.border && props.border};
-  border-radius: ${(props) => props.borderRadius && props.borderRadius};
-  filter: ${(props) => (props.hover || props.active) && "brightness(1.4)"};
-  font-family: R-FLEX-REGULAR;
-  opacity: ${(props) => props.disable && "0.7"};
-`;
-
-export const CustomGhostButton = styled(CustomButton)`
   border: ${(props) =>
-    props.backgroundColor && `1px solid ${props.backgroundColor}`};
-  background-color: transparent;
-  color: ${(props) => props.backgroundColor && props.backgroundColor};
-`;
-export const CustomIconButton = styled(CustomButton)`
-  justify-content: space-around;
-  padding-left: ${(props) => props.paddingLr && props.paddingLr};
-  padding-right: ${(props) => props.paddingLr && props.paddingLr};
-  padding-top: ${(props) => props.paddingTb && props.paddingTb};
-  padding-bottom: ${(props) => props.paddingTb && props.paddingTb};
-  min-width: max-content;
+    props.variants === "ghost"
+      ? `1px solid ${props.backgroundColor}`
+      : props.border};
+  border-radius: ${(props) => props.borderRadius && props.borderRadius};
+  filter: ${(props) =>
+    (props.variants === "hover" || props.variants === "active") &&
+    "brightness(1.4)"};
+  font-family: R-FLEX-REGULAR;
 `;

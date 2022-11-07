@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Children, useEffect, useState } from "react";
 import {
   CloseButton,
   InfoContainer,
@@ -9,8 +9,9 @@ import {
   SectionTitle,
 } from "./style";
 
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { AiOutlineMinusCircle } from "react-icons/ai";
-import { AddButton, AddColorButton, Popover } from "../../components";
+import { AddColorButton, Popover } from "../../components";
 import { useRecoilState } from "recoil";
 import { firebaseDataState } from "../../recoil-atom";
 import { doc, updateDoc } from "firebase/firestore";
@@ -20,6 +21,8 @@ function ColorOrganisms(props) {
   const [onHover, setOnHover] = useState(false);
   const [hoverId, setHoverId] = useState();
   const [isDelete, setIsDelete] = useState(false);
+  const [isPaste, setIsPaste] = useState(false);
+  const variants = [1.6, 1.4, 1.2, 1, 0.8, 0.6, 0.4];
 
   const deleteColor = async (index) => {
     setIsDelete(true);
@@ -35,6 +38,14 @@ function ColorOrganisms(props) {
       setIsDelete(false);
     }, 2000);
   };
+
+  const pasteColor = () => {
+    setIsPaste(true);
+    setTimeout(() => {
+      setIsPaste(false);
+    }, 2000);
+  };
+
   return (
     <MainContainer>
       <InfoContainer>
@@ -59,34 +70,27 @@ function ColorOrganisms(props) {
                 setHoverId();
               }}
             >
-              <PaletteContainer>
-                <Palette light={1.6} bgColor={item} />
-                brightness(1.6)
-              </PaletteContainer>
-              <PaletteContainer>
-                <Palette light={1.4} bgColor={item} />
-                brightness(1.4)
-              </PaletteContainer>
-              <PaletteContainer>
-                <Palette light={1.2} bgColor={item} />
-                brightness(1.2)
-              </PaletteContainer>
-              <PaletteContainer>
-                <Palette light={1.0} bgColor={item} />
-                {item}
-              </PaletteContainer>
-              <PaletteContainer>
-                <Palette light={0.8} bgColor={item} />
-                brightness(0.8)
-              </PaletteContainer>
-              <PaletteContainer>
-                <Palette light={0.6} bgColor={item} />
-                brightness(0.6)
-              </PaletteContainer>
-              <PaletteContainer>
-                <Palette light={0.4} bgColor={item} />
-                brightness(0.4)
-              </PaletteContainer>
+              {variants.map((value) => {
+                return (
+                  <div>
+                    <CopyToClipboard
+                      text={`color: ${item}; filter: brightness(${value});`}
+                    >
+                      <PaletteContainer>
+                        <Palette
+                          light={value}
+                          bgColor={item}
+                          onClick={() => {
+                            pasteColor();
+                          }}
+                        />
+                        {value === 1 ? item : `brightness(${value})`}
+                      </PaletteContainer>
+                    </CopyToClipboard>
+                  </div>
+                );
+              })}
+
               {onHover && index === hoverId && (
                 <CloseButton
                   whileHover={{ scale: 1.2 }}
@@ -100,6 +104,7 @@ function ColorOrganisms(props) {
         );
       })}
       {isDelete && <Popover type="delete" />}
+      {isPaste && <Popover type="copy" />}
     </MainContainer>
   );
 }
