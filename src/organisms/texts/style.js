@@ -26,16 +26,17 @@ export const SectionTitle = styled.h1`
 `;
 
 export const TextPreview = styled.p`
+  cursor: pointer;
   font-size: ${(props) =>
-    props.h1
+    props.type === "h1"
       ? `calc(${props.fontSize} + 24px)`
-      : props.h2
+      : props.type === "h2"
       ? `calc(${props.fontSize} + 18px)`
-      : props.h3
+      : props.type === "h3"
       ? `calc(${props.fontSize} + 12px)`
-      : props.h4
+      : props.type === "h4"
       ? `calc(${props.fontSize} + 6px)`
-      : props.p
+      : props.type === "p"
       ? `calc(${props.fontSize})`
       : "24px"};
   font-family: R-FLEX-REGULAR;

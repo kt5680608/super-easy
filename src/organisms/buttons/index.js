@@ -130,9 +130,7 @@ function ButtonOrganisms() {
                 `}
                   >
                     <CustomButton
-                      onClick={() => {
-                        pasteButton();
-                      }}
+                      onClick={pasteButton}
                       key={value}
                       backgroundColor={item.backgroundColor}
                       color={item.color}

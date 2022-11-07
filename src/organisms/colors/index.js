@@ -80,11 +80,9 @@ function ColorOrganisms(props) {
                         <Palette
                           light={value}
                           bgColor={item}
-                          onClick={() => {
-                            pasteColor();
-                          }}
+                          onClick={pasteColor}
                         />
-                        {value === 1 ? item : `brightness(${value})`}
+                        {value === 1 ? item : `brightness: ${value}`}
                       </PaletteContainer>
                     </CopyToClipboard>
                   </div>
