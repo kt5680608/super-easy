@@ -14,6 +14,7 @@ import {
   MainContainer,
   SectionTitle,
 } from "./style";
+import { addBrightness } from "../../utils";
 
 function ButtonOrganisms() {
   const [data, setData] = useRecoilState(firebaseDataState);
@@ -64,6 +65,7 @@ function ButtonOrganisms() {
       {data?.button?.map((item, index) => {
         return (
           <ButtonUlContainer
+            key={item}
             onHoverStart={() => {
               setOnHover(true);
               setHoverId(index);
@@ -78,12 +80,19 @@ function ButtonOrganisms() {
             }}
           >
             {variants.map((value) => {
+              const brightnessType =
+                value === "active" || value === "hover" ? 1.4 : 1;
+              const colorAddBrightness = addBrightness(
+                item.backgroundColor,
+                brightnessType
+              );
+
               return (
                 <div>
                   <CopyToClipboard
                     text={`
                 background-color: ${
-                  value === "ghost" ? "transparent" : item.backgroundColor
+                  value === "ghost" ? "transparent" : colorAddBrightness
                 };
                 color: ${value === "ghost" ? item.backgroundColor : item.color};
                 padding-top:${
@@ -122,17 +131,11 @@ function ButtonOrganisms() {
                 border-radius: ${item.borderRadius};
                 font-size: ${item.fontSize};
                 opacity: ${value === "disabled" ? 0.7 : 1};
-                filter: ${
-                  value === "active" || "hover"
-                    ? "brightness(1.4)"
-                    : "brightness(1)"
-                };
                 `}
                   >
                     <CustomButton
                       onClick={pasteButton}
-                      key={value}
-                      backgroundColor={item.backgroundColor}
+                      backgroundColor={colorAddBrightness}
                       color={item.color}
                       paddingTb={item.paddingTb}
                       paddingLr={item.paddingLr}

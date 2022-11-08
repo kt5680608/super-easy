@@ -67,7 +67,7 @@ export const CloseButton = styled(motion.div)`
 
 export const ButtonUlContainer = styled(motion.ul)`
   display: flex;
-  width: 90%;
+  width: 100%;
   height: max-content;
   gap: 36px;
   position: relative;
@@ -130,8 +130,5 @@ export const CustomButton = styled.button`
       ? `1px solid ${props.backgroundColor}`
       : props.border};
   border-radius: ${(props) => props.borderRadius && props.borderRadius};
-  filter: ${(props) =>
-    (props.variants === "hover" || props.variants === "active") &&
-    "brightness(1.4)"};
   font-family: R-FLEX-REGULAR;
 `;

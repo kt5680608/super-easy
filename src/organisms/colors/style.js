@@ -17,7 +17,7 @@ export const SectionTitle = styled.h1`
 export const PaletteUlContainer = styled(motion.ul)`
   display: flex;
   height: max-content;
-  width: 90%;
+  width: 100%;
   z-index: 1;
   gap: 36px;
   position: relative;
@@ -50,7 +50,6 @@ export const Palette = styled(motion.div)`
   cursor: pointer;
   border-radius: 50%;
   background-color: ${(props) => props.bgColor && props.bgColor};
-  filter: ${(props) => props.light && `brightness(${props.light})`};
 `;
 export const InfoContainer = styled.div`
   width: 100%;

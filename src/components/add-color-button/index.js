@@ -24,11 +24,12 @@ function AddColorButton() {
   const user = JSON.parse(localStorage.getItem("user"));
   const [data, setData] = useRecoilState(firebaseDataState);
   const [error, setError] = useState(false);
-  const regex = /^#(?:[0-9a-f]{3}){1,2}$/i;
+  const [errorMsg, setErrorMsg] = useState("");
+  const regex = /^#(?:[0-9a-f]{6}){1,2}$/i;
 
   const handleAddColor = async (e) => {
     e.preventDefault();
-    console.log("Here");
+
     try {
       if (regex.test(paletteColor)) {
         if (data?.color === undefined) {
@@ -39,18 +40,21 @@ function AddColorButton() {
             text: data?.text,
           });
         } else {
-          await updateDoc(doc(db, "users", user.uid), {
-            color: [...data.color, paletteColor],
-          });
-          setData({
-            color: [...data.color, paletteColor],
-            button: data?.button,
-            text: data?.text,
-          });
+          if (data.color.includes(paletteColor)) {
+            setErrorMsg("Same color exists");
+            console.log(data.color.includes(paletteColor));
+          } else {
+            await updateDoc(doc(db, "users", user.uid), {
+              color: [...data.color, paletteColor],
+            });
+            setData({
+              color: [...data.color, paletteColor],
+              button: data?.button,
+              text: data?.text,
+            });
+            document?.getElementById("modal__add__color")?.click();
+          }
         }
-        setError(false);
-        setPaletteColor("");
-        document?.getElementById("modal__add__color")?.click();
       } else {
         setError(true);
       }
@@ -71,6 +75,7 @@ function AddColorButton() {
             />
           </ModalInputContainer>
           {error && <span>not valid color code</span>}
+          {errorMsg !== "" && <span>{errorMsg}</span>}
           <ModalButton type="submit" onClick={handleAddColor}>
             submit
           </ModalButton>
@@ -79,6 +84,9 @@ function AddColorButton() {
       <Button
         onClick={() => {
           document?.getElementById("modal__add__color")?.click();
+          setError(true);
+          setError(false);
+          setErrorMsg("");
         }}
       >
         <MdAdd color="white" size={40} />

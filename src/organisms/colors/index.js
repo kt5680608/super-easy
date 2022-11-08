@@ -16,7 +16,8 @@ import { useRecoilState } from "recoil";
 import { firebaseDataState } from "../../recoil-atom";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase-config";
-function ColorOrganisms(props) {
+import { addBrightness, hexToRgb } from "../../utils";
+function ColorOrganisms() {
   const [data, setData] = useRecoilState(firebaseDataState);
   const [onHover, setOnHover] = useState(false);
   const [hoverId, setHoverId] = useState();
@@ -54,9 +55,8 @@ function ColorOrganisms(props) {
       </InfoContainer>
       {data?.color?.map((item, index) => {
         return (
-          <>
+          <div key={item}>
             <PaletteUlContainer
-              key={item}
               whileHover={{ y: -4 }}
               style={{
                 backgroundColor: hoverId === index ? "#efefef" : "white",
@@ -71,18 +71,16 @@ function ColorOrganisms(props) {
               }}
             >
               {variants.map((value) => {
+                const colorAddBrightness = addBrightness(item, value);
                 return (
-                  <div>
-                    <CopyToClipboard
-                      text={`color: ${item}; filter: brightness(${value});`}
-                    >
+                  <div key={value}>
+                    <CopyToClipboard text={`${colorAddBrightness}`}>
                       <PaletteContainer>
                         <Palette
-                          light={value}
-                          bgColor={item}
+                          bgColor={colorAddBrightness}
                           onClick={pasteColor}
                         />
-                        {value === 1 ? item : `brightness: ${value}`}
+                        {colorAddBrightness}
                       </PaletteContainer>
                     </CopyToClipboard>
                   </div>
@@ -98,9 +96,10 @@ function ColorOrganisms(props) {
                 </CloseButton>
               )}
             </PaletteUlContainer>
-          </>
+          </div>
         );
       })}
+
       {isDelete && <Popover type="delete" />}
       {isPaste && <Popover type="copy" />}
     </MainContainer>

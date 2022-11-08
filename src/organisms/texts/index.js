@@ -43,6 +43,7 @@ function TextOrganisms() {
           {variants.map((item, index) => {
             return (
               <CopyToClipboard
+                key={item.tag}
                 text={`
               font-size: ${
                 item.tag === "h1"
@@ -63,7 +64,6 @@ function TextOrganisms() {
                   onClick={pasteText}
                   fontSize={data?.text}
                   type={item.tag}
-                  key={item.tag}
                   onHoverStart={() => {
                     setOnHover(true);
                     setHoverId(index);
