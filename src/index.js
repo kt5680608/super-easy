@@ -6,7 +6,7 @@ import App from "./App";
 import { GlobalStyles } from "./global-styles";
 import { FontStyles } from "./fonts/fonts";
 import { BrowserRouter } from "react-router-dom";
-import { AuthContextProvider } from "./context/AuthContext";
+import { ContextProvider } from "./context/AuthContext";
 import { RecoilRoot } from "recoil";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -15,9 +15,9 @@ root.render(
       <RecoilRoot>
         <GlobalStyles />
         <FontStyles />
-        <AuthContextProvider>
+        <ContextProvider>
           <App />
-        </AuthContextProvider>
+        </ContextProvider>
       </RecoilRoot>
     </BrowserRouter>
   </React.StrictMode>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AddTextButton, Popover } from "../../components";
 import { useRecoilState } from "recoil";
+import { motion } from "framer-motion";
 import {
   InfoContainer,
   MainContainer,
@@ -10,6 +11,7 @@ import {
 } from "./style";
 import { firebaseDataState } from "../../recoil-atom";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { MotionConfig } from "framer-motion";
 
 function TextOrganisms() {
   const [data, setData] = useRecoilState(firebaseDataState);
@@ -29,6 +31,22 @@ function TextOrganisms() {
     { tag: "h4", value: 6 },
     { tag: "p", value: 0 },
   ];
+
+  const parents = {
+    hidden: { opacity: 0, y: 12 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const children = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 },
+  };
   let fontSizeToNumber = data?.text;
   fontSizeToNumber = fontSizeToNumber.split("px");
 
@@ -38,13 +56,19 @@ function TextOrganisms() {
         <SectionTitle>Text</SectionTitle>
         <AddTextButton />
       </InfoContainer>
-      {data?.text && (
-        <TextUlContainer>
-          {variants.map((item, index) => {
-            return (
-              <CopyToClipboard
-                key={item.tag}
-                text={`
+      <motion.div
+        style={{ width: "90%" }}
+        variants={parents}
+        initial="hidden"
+        animate="show"
+      >
+        {data?.text && (
+          <TextUlContainer>
+            {variants.map((item, index) => {
+              return (
+                <CopyToClipboard
+                  key={item.tag}
+                  text={`
               font-size: ${
                 item.tag === "h1"
                   ? `calc(${data.text} + 24px)`
@@ -59,34 +83,37 @@ function TextOrganisms() {
                   : "24px"
               };
               `}
-              >
-                <TextPreview
-                  onClick={pasteText}
-                  fontSize={data?.text}
-                  type={item.tag}
-                  onHoverStart={() => {
-                    setOnHover(true);
-                    setHoverId(index);
-                  }}
-                  onHoverEnd={() => {
-                    setOnHover(true);
-                    setHoverId();
-                  }}
-                  style={{
-                    backgroundColor: hoverId === index ? "#efefef" : "white",
-                  }}
                 >
-                  Typography
-                  <span>
-                    {" "}
-                    {item.tag} {Number(fontSizeToNumber[0]) + item.value + "px"}
-                  </span>
-                </TextPreview>
-              </CopyToClipboard>
-            );
-          })}
-        </TextUlContainer>
-      )}
+                  <TextPreview
+                    variants={children}
+                    onClick={pasteText}
+                    fontSize={data?.text}
+                    type={item.tag}
+                    onHoverStart={() => {
+                      setOnHover(true);
+                      setHoverId(index);
+                    }}
+                    onHoverEnd={() => {
+                      setOnHover(true);
+                      setHoverId();
+                    }}
+                    style={{
+                      backgroundColor: hoverId === index ? "#efefef" : "white",
+                    }}
+                  >
+                    Typography
+                    <span>
+                      {" "}
+                      {item.tag}{" "}
+                      {Number(fontSizeToNumber[0]) + item.value + "px"}
+                    </span>
+                  </TextPreview>
+                </CopyToClipboard>
+              );
+            })}
+          </TextUlContainer>
+        )}
+      </motion.div>
       {isPaste && <Popover type="copy" />}
     </MainContainer>
   );

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 export const MainContainer = styled.section`
-  margin: 60px auto;
+  margin: 120px auto;
   max-width: 1140px;
   display: flex;
   flex-direction: column;
@@ -50,6 +50,8 @@ export const Palette = styled(motion.div)`
   cursor: pointer;
   border-radius: 50%;
   background-color: ${(props) => props.bgcolor && props.bgcolor};
+  filter: ${(props) =>
+    props.isSelect ? "brightness(60%)" : "brightness(100%)"};
 `;
 export const InfoContainer = styled.div`
   width: 100%;

@@ -12,6 +12,8 @@ export const NavMainContainer = styled.nav`
   align-items: center;
   top: 0;
   box-shadow: rgba(149, 157, 165, 0.1) 0px 0px 24px;
+  position: fixed;
+  z-index: 999;
   div {
     display: flex;
     justify-content: space-between;
@@ -42,15 +44,15 @@ export const MenuItemLink = styled(motion.a)`
   text-align: left;
 `;
 
-export const LogoutBtn = styled.button`
+export const LogoutBtn = styled(motion.button)`
   border: none;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   font-family: R-FLEX-REGULAR;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 6px 12px;
+  padding: 12px 12px;
   border-radius: 24px;
   cursor: pointer;
 `;
