@@ -4,6 +4,8 @@ import { AuthContext } from "./context/AuthContext";
 import { AuthPage, MainPage } from "./pages";
 function App() {
   const { currentUser } = useContext(AuthContext);
+  const example = localStorage.getItem("firstLandingSuperEasy");
+
   const RequireAuth = ({ children }) => {
     return currentUser !== null ? children : <Navigate to="/auth" />;
   };

@@ -66,7 +66,7 @@ function AddColorButton() {
     <>
       <Modal id="modal__add__color" modalCloseButton={false} display={false}>
         <ModalBodyContainer>
-          <Palette bgColor={paletteColor} />
+          <Palette bgcolor={paletteColor} />
           <ModalInputContainer>
             Colour
             <ModalInput

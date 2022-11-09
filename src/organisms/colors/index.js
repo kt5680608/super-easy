@@ -77,7 +77,7 @@ function ColorOrganisms() {
                     <CopyToClipboard text={`${colorAddBrightness}`}>
                       <PaletteContainer>
                         <Palette
-                          bgColor={colorAddBrightness}
+                          bgcolor={colorAddBrightness}
                           onClick={pasteColor}
                         />
                         {colorAddBrightness}

@@ -42,7 +42,7 @@ export const Palette = styled.div`
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background-color: ${(props) => props.bgColor && props.bgColor};
+  background-color: ${(props) => props.bgcolor && props.bgcolor};
   filter: ${(props) => props.light && `brightness(${props.light})`};
 `;
 export const InfoContainer = styled.div`

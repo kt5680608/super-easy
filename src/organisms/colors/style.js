@@ -49,7 +49,7 @@ export const Palette = styled(motion.div)`
   z-index: 999;
   cursor: pointer;
   border-radius: 50%;
-  background-color: ${(props) => props.bgColor && props.bgColor};
+  background-color: ${(props) => props.bgcolor && props.bgcolor};
 `;
 export const InfoContainer = styled.div`
   width: 100%;
