@@ -48,7 +48,7 @@ function TextOrganisms() {
     show: { opacity: 1 },
   };
   let fontSizeToNumber = data?.text;
-  fontSizeToNumber = fontSizeToNumber.split("px");
+  fontSizeToNumber = fontSizeToNumber?.split("px");
 
   return (
     <MainContainer>
