@@ -13,7 +13,8 @@ function MainPage() {
   const [loading, setLoading] = useState(true);
 
   const getColorData = async () => {
-    const user = JSON.parse(localStorage?.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user"));
+
     if (user?.uid !== null) {
       const data = await (await getDoc(doc(db, "users", user?.uid))).data();
       await setData(data);
