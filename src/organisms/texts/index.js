@@ -49,7 +49,7 @@ function TextOrganisms() {
   };
 
   if (data?.text !== undefined) {
-    const fontSizeToNumber = data?.text.split("px");
+    const fontSizeToNumber = data.text;
   }
 
   return (
