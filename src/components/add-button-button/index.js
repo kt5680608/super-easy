@@ -50,7 +50,7 @@ function AddButtonButton() {
     try {
       if (data?.button.length === 0) {
         setData({
-          color: data?.color || [],
+          color: data.color !== [] ? data.color : [],
           button: [
             {
               backgroundColor: backgroundColor,
@@ -62,7 +62,7 @@ function AddButtonButton() {
               fontSize: fontSize,
             },
           ],
-          text: data?.text || null,
+          text: data.text !== null ? data.text : null,
         });
         await setDoc(doc(db, "users", user.uid), {
           color: data?.color || [],
@@ -77,11 +77,10 @@ function AddButtonButton() {
               fontSize: fontSize,
             },
           ],
-          text: data?.text || null,
+          text: data?.text,
         });
         document?.getElementById("modal__add__button")?.click();
       } else {
-        console.log("hhh");
         setData({
           color: data?.color || [],
           button: [
@@ -96,7 +95,7 @@ function AddButtonButton() {
               fontSize: fontSize,
             },
           ],
-          text: data?.text || null,
+          text: data.text !== null ? data.text : null,
         });
         await updateDoc(doc(db, "users", user.uid), {
           button: [

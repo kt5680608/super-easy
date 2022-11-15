@@ -33,11 +33,15 @@ function AddColorButton() {
     try {
       if (regex.test(paletteColor)) {
         if (data?.color.length === 0) {
-          setData({ color: [paletteColor], button: data?.button });
+          setData({
+            color: [paletteColor],
+            button: data.button !== [] ? data.button : [],
+            text: data.text !== null ? data.text : null,
+          });
           await setDoc(doc(db, "users", user.uid), {
             color: [paletteColor],
-            button: data?.button || [],
-            text: data?.text || null,
+            button: data.button !== [] ? data.button : [],
+            text: data.text !== null ? data.text : null,
           });
         } else {
           if (data.color.includes(paletteColor)) {
@@ -48,8 +52,8 @@ function AddColorButton() {
             });
             setData({
               color: [...data.color, paletteColor],
-              button: data?.button || [],
-              text: data?.text || null,
+              button: data.button !== [] ? data.button : [],
+              text: data.text !== null ? data.text : null,
             });
           }
         }

@@ -32,13 +32,13 @@ function AddTextButton() {
     try {
       if (data.text === null) {
         setData({
-          color: data?.color || [],
-          button: data?.button || [],
+          color: data.color !== null ? data.color : [],
+          button: data.button !== null ? data.button : [],
           text: defaultFontSize,
         });
         await setDoc(doc(db, "users", user.uid), {
-          color: data?.color || [],
-          button: data?.button || [],
+          color: data.color !== null ? data.color : [],
+          button: data.button !== null ? data.button : [],
           text: defaultFontSize,
         });
       } else {
@@ -46,8 +46,8 @@ function AddTextButton() {
           text: defaultFontSize,
         });
         setData({
-          color: data?.color || [],
-          button: data?.button || [],
+          color: data.color !== null ? data.color : [],
+          button: data.button !== null ? data.button : [],
           text: defaultFontSize,
         });
       }
