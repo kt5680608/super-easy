@@ -49,8 +49,10 @@ function TextOrganisms() {
   };
   let fontSizeToNumber = data?.text;
 
-  if (fontSizeToNumber !== undefined)
+  if (fontSizeToNumber !== undefined) {
+    console.log("Here");
     fontSizeToNumber = fontSizeToNumber?.split("px");
+  }
 
   return (
     <MainContainer>
