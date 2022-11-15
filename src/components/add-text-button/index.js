@@ -30,15 +30,15 @@ function AddTextButton() {
   const handleAddColor = async (e) => {
     e.preventDefault();
     try {
-      if (data?.text === undefined) {
+      if (data?.text === null) {
         setData({
-          color: data?.color,
-          button: data?.button,
+          color: data?.color || null,
+          button: data?.button || null,
           text: defaultFontSize,
         });
         await setDoc(doc(db, "users", user.uid), {
-          color: data?.color,
-          button: data?.button,
+          color: data?.color || null,
+          button: data?.button || null,
           text: defaultFontSize,
         });
       } else {
@@ -46,8 +46,8 @@ function AddTextButton() {
           text: defaultFontSize,
         });
         setData({
-          color: data?.color,
-          button: data?.button,
+          color: data?.color || null,
+          button: data?.button || null,
           text: defaultFontSize,
         });
       }

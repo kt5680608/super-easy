@@ -32,29 +32,29 @@ function AddColorButton() {
 
     try {
       if (regex.test(paletteColor)) {
-        if (data?.color === undefined) {
+        if (data?.color === null) {
+          console.log(data?.button);
           setData({ color: [paletteColor], button: data?.button });
           await setDoc(doc(db, "users", user.uid), {
             color: [paletteColor],
-            button: data?.button,
-            text: data?.text,
+            button: data?.button || null,
+            text: data?.text || null,
           });
         } else {
           if (data.color.includes(paletteColor)) {
             setErrorMsg("Same color exists");
-            console.log(data.color.includes(paletteColor));
           } else {
             await updateDoc(doc(db, "users", user.uid), {
               color: [...data.color, paletteColor],
             });
             setData({
               color: [...data.color, paletteColor],
-              button: data?.button,
-              text: data?.text,
+              button: data?.button || null,
+              text: data?.text || null,
             });
-            document?.getElementById("modal__add__color")?.click();
           }
         }
+        document?.getElementById("modal__add__color")?.click();
       } else {
         setError(true);
       }

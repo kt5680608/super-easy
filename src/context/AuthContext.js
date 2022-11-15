@@ -1,5 +1,5 @@
 import { createContext, useReducer, useEffect } from "react";
-
+import { firebaseDataState } from "../recoil-atom";
 import AuthReducer from "./AuthReducer";
 
 const INITIAL_STATE = {

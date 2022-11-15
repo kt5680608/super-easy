@@ -3,10 +3,13 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { NavMainContainer, LogoutBtn } from "./style";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { firebaseDataState } from "../../recoil-atom";
 function Navbar() {
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
   const [onHover, setOnHover] = useState(false);
+  const [data, setData] = useRecoilState(firebaseDataState);
   return (
     <NavMainContainer>
       <div>
@@ -26,6 +29,7 @@ function Navbar() {
           style={onHover && { backgroundColor: "black", color: "white" }}
           onClick={() => {
             dispatch({ type: "LOGOUT" });
+            setData({ button: [], color: [], text: 16 });
             navigate("/auth");
           }}
         >

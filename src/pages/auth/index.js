@@ -43,6 +43,11 @@ function AuthPage() {
       .then(() => {
         setIsSignUp(true);
       })
+      .then(() => {
+        setType("signIn");
+        setEmail("");
+        setPassword("");
+      })
       .catch((error) => {
         if (error.code === "auth/invalid-email") {
           setError("Wrong email type");

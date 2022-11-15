@@ -48,9 +48,9 @@ function AddButtonButton() {
   const handleAddButton = async (e) => {
     e.preventDefault();
     try {
-      if (data?.button === undefined) {
+      if (data?.button === null) {
         setData({
-          color: data?.color,
+          color: data?.color || null,
           button: [
             {
               backgroundColor: backgroundColor,
@@ -62,10 +62,10 @@ function AddButtonButton() {
               fontSize: fontSize,
             },
           ],
-          text: data?.text,
+          text: data?.text || null,
         });
         await setDoc(doc(db, "users", user.uid), {
-          color: data?.color,
+          color: data?.color || null,
           button: [
             {
               backgroundColor: backgroundColor,
@@ -77,14 +77,14 @@ function AddButtonButton() {
               fontSize: fontSize,
             },
           ],
-          text: data?.text,
+          text: data?.text || null,
         });
         document?.getElementById("modal__add__button")?.click();
       } else {
         setData({
-          color: data?.color,
+          color: data?.color || null,
           button: [
-            ...data.button,
+            ...data?.button,
             {
               backgroundColor: backgroundColor,
               color: color,
@@ -95,7 +95,7 @@ function AddButtonButton() {
               fontSize: fontSize,
             },
           ],
-          text: data?.text,
+          text: data?.text || null,
         });
         await updateDoc(doc(db, "users", user.uid), {
           button: [
