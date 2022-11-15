@@ -49,8 +49,7 @@ function TextOrganisms() {
   };
   let fontSizeToNumber = data?.text;
 
-  if (fontSizeToNumber !== undefined) {
-    console.log("Here");
+  if (fontSizeToNumber !== undefined || null) {
     fontSizeToNumber = fontSizeToNumber?.split("px");
   }
 
@@ -109,7 +108,7 @@ function TextOrganisms() {
                     <span>
                       {" "}
                       {item.tag}{" "}
-                      {Number(fontSizeToNumber[0]) + item.value + "px"}
+                      {Number(data?.text.split("px")[0]) + item.value + "px"}
                     </span>
                   </TextPreview>
                 </CopyToClipboard>

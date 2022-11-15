@@ -29,7 +29,7 @@ function Navbar() {
           style={onHover && { backgroundColor: "black", color: "white" }}
           onClick={() => {
             dispatch({ type: "LOGOUT" });
-            setData({ button: [], color: [], text: 16 });
+            setData({ button: [], color: [], text: null });
             navigate("/auth");
           }}
         >

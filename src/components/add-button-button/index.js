@@ -48,9 +48,9 @@ function AddButtonButton() {
   const handleAddButton = async (e) => {
     e.preventDefault();
     try {
-      if (data?.button === null) {
+      if (data?.button.length === 0) {
         setData({
-          color: data?.color || null,
+          color: data?.color || [],
           button: [
             {
               backgroundColor: backgroundColor,
@@ -65,7 +65,7 @@ function AddButtonButton() {
           text: data?.text || null,
         });
         await setDoc(doc(db, "users", user.uid), {
-          color: data?.color || null,
+          color: data?.color || [],
           button: [
             {
               backgroundColor: backgroundColor,
@@ -81,8 +81,9 @@ function AddButtonButton() {
         });
         document?.getElementById("modal__add__button")?.click();
       } else {
+        console.log("hhh");
         setData({
-          color: data?.color || null,
+          color: data?.color || [],
           button: [
             ...data?.button,
             {

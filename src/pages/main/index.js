@@ -16,9 +16,14 @@ function MainPage() {
     const user = JSON.parse(localStorage?.getItem("user"));
 
     if (user?.uid !== undefined) {
-      const data = await (await getDoc(doc(db, "users", user?.uid))).data();
-      await setData(data);
+      const firebaseData = await (
+        await getDoc(doc(db, "users", user?.uid))
+      ).data();
+      if (firebaseData !== undefined) {
+        await setData(firebaseData);
+      }
     }
+    console.log(data);
     setTimeout(() => {
       setLoading(false);
     }, 800);

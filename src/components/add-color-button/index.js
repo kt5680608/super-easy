@@ -32,12 +32,11 @@ function AddColorButton() {
 
     try {
       if (regex.test(paletteColor)) {
-        if (data?.color === null) {
-          console.log(data?.button);
+        if (data?.color.length === 0) {
           setData({ color: [paletteColor], button: data?.button });
           await setDoc(doc(db, "users", user.uid), {
             color: [paletteColor],
-            button: data?.button || null,
+            button: data?.button || [],
             text: data?.text || null,
           });
         } else {
@@ -49,7 +48,7 @@ function AddColorButton() {
             });
             setData({
               color: [...data.color, paletteColor],
-              button: data?.button || null,
+              button: data?.button || [],
               text: data?.text || null,
             });
           }
