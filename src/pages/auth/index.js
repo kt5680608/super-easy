@@ -80,6 +80,7 @@ function AuthPage() {
               }}
               value={password}
             />
+            {error !== "" && <>{error}</>}
             <button type="submit" onClick={handleSignIn}>
               sign in
             </button>

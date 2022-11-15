@@ -23,7 +23,6 @@ function MainPage() {
         await setData(firebaseData);
       }
     }
-    console.log(data);
     setTimeout(() => {
       setLoading(false);
     }, 800);

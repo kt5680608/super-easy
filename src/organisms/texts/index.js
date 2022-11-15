@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AddTextButton, Popover } from "../../components";
 import { useRecoilState } from "recoil";
 import { motion } from "framer-motion";
@@ -11,7 +11,6 @@ import {
 } from "./style";
 import { firebaseDataState } from "../../recoil-atom";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { MotionConfig } from "framer-motion";
 
 function TextOrganisms() {
   const [data, setData] = useRecoilState(firebaseDataState);
@@ -24,6 +23,10 @@ function TextOrganisms() {
       setIsPaste(false);
     }, 2000);
   };
+
+  useEffect(() => {
+    console.log(data.text);
+  }, [data.text]);
   const variants = [
     { tag: "h1", value: 24 },
     { tag: "h2", value: 18 },
@@ -59,13 +62,13 @@ function TextOrganisms() {
         <SectionTitle>Text</SectionTitle>
         <AddTextButton />
       </InfoContainer>
-      <motion.div
-        style={{ width: "90%" }}
-        variants={parents}
-        initial="hidden"
-        animate="show"
-      >
-        {data?.text && (
+      {data.text === null ? null : (
+        <motion.div
+          style={{ width: "90%" }}
+          variants={parents}
+          initial="hidden"
+          animate="show"
+        >
           <TextUlContainer>
             {variants.map((item, index) => {
               return (
@@ -90,7 +93,7 @@ function TextOrganisms() {
                   <TextPreview
                     variants={children}
                     onClick={pasteText}
-                    fontSize={data?.text}
+                    fontSize={data.text}
                     type={item.tag}
                     onHoverStart={() => {
                       setOnHover(true);
@@ -108,15 +111,16 @@ function TextOrganisms() {
                     <span>
                       {" "}
                       {item.tag}{" "}
-                      {Number(data?.text.split("px")[0]) + item.value + "px"}
+                      {Number(data.text.split("px")[0]) + item.value + "px"}
                     </span>
                   </TextPreview>
                 </CopyToClipboard>
               );
             })}
           </TextUlContainer>
-        )}
-      </motion.div>
+        </motion.div>
+      )}
+
       {isPaste && <Popover type="copy" />}
     </MainContainer>
   );

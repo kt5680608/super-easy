@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 export const MainContainer = styled.section`
-  margin: 120px auto;
+  margin: 120px auto 60px auto;
   max-width: 1140px;
   display: flex;
   flex-direction: column;

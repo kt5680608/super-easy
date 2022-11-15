@@ -30,7 +30,7 @@ function AddTextButton() {
   const handleAddColor = async (e) => {
     e.preventDefault();
     try {
-      if (data?.text === null) {
+      if (data.text === null) {
         setData({
           color: data?.color || [],
           button: data?.button || [],
