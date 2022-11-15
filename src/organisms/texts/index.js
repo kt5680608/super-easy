@@ -47,8 +47,10 @@ function TextOrganisms() {
     hidden: { opacity: 0 },
     show: { opacity: 1 },
   };
-  let fontSizeToNumber = data?.text;
-  fontSizeToNumber = fontSizeToNumber?.split("px");
+
+  if (data?.text !== undefined) {
+    const fontSizeToNumber = data?.text.split("px");
+  }
 
   return (
     <MainContainer>
